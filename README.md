@@ -1,3 +1,9 @@
+This repository serves as the static site https://nyuaisafety.org/ via Github
+Pages and storage for club brand assets (e.g., SVG logos, HTML email templates).
+The latter are stored in ./brand
+
+# Website
+
 engineering goals
 
 - Mobile and desktop support
