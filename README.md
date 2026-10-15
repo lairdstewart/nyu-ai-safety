@@ -7,10 +7,9 @@ The latter are stored in ./brand
 engineering goals
 
 - Mobile and desktop support
-- Easy for a freshman with introductory HTML knowledge to edit/maintain
-- Fast
+- Fast developer feedback (e.g., no or fast build)
+- Fast to load/run (e.g., limit JS, large assets)
 - Works on every major browser (Safari, Chrome, Firefox)
-- Minimal JS
 
 UI/UX goals
 
