@@ -53,7 +53,10 @@ for url in os.environ["ICAL_URLS"].split(","):
         urllib.request.urlopen(url.strip()).read()
     )
     for event in recurring_ical_events.of(calendar).between(now, until):
-        if not isinstance(event, icalendar.Event) or event.get("STATUS") == "CANCELLED":
+        if (
+            not isinstance(event, icalendar.Event)
+            or event.get("STATUS") == "CANCELLED"
+        ):
             continue
         if now <= to_datetime(event.start) < until:
             events.append(event)
@@ -65,9 +68,6 @@ for event in events:
     title = escape(str(event.get("SUMMARY", "")))
     location = escape(str(event.get("LOCATION", "")))
     description = " ".join(str(event.get("DESCRIPTION", "")).split())
-    # Google Calendar stores rich-text descriptions as HTML; keep those as-is.
-    if not re.search(r"<[a-zA-Z][^>]*>", description):
-        description = escape(description)
     parts.append(
         f"<h2>{title}</h2>\n"
         "<ul>\n"
