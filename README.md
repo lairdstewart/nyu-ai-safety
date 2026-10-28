@@ -33,16 +33,12 @@ newsletter/ contains html templates for the newsletter. To send a newsletter
 text list.
 
 1. Install [uv](https://docs.astral.sh/uv/)
-2. `cp newsletter/.env.example newsletter/.env`
-3. Set `ICAL_URLS` in `newsletter/.env` to a comma-separated list of iCal URLs
+2. `cd newsletter/`
+3. `cp .env.example .env`
+4. Set `ICAL_URLS` in `newsletter/.env` to a comma-separated list of iCal URLs
    (in Google Calendar: Settings → your calendar → "Public address in iCal
    format").
-
-Run:
-
-```sh
-cd newsletter
-uv run calendar-scrape.py
-```
+5. `uv init`
+6. `uv run calendar-scrape.py`
 
 This writes `newsletter/events.txt`.
