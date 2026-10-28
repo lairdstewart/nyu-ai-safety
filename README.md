@@ -26,6 +26,7 @@ newsletter/ contains html templates for the newsletter. To send a newsletter
 1. Install Thunderbird
 2. TODO write the rest of these instructions
 3. Run the calendar scraper (instructions below) to gather events
+4. Change local path to logo to absolute path (e.g., file:///Users/foo/rectangle-white-purple-background.png)
 
 ## calendar scraper
 
