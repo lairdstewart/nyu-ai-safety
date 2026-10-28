@@ -16,3 +16,33 @@ UI/UX goals
 - Content-first
 - Easy to navigate
 - Non-pretentious
+
+# Newsletter
+
+## Sending a newsletter
+
+newsletter/ contains html templates for the newsletter. To send a newsletter
+
+1. Install Thunderbird
+2. TODO write the rest of these instructions
+3. Run the calendar scraper (instructions below) to gather events
+
+## calendar scraper
+
+`newsletter/calendar-scrape.py` turns upcoming calendar events into a plain
+text list.
+
+1. Install [uv](https://docs.astral.sh/uv/)
+2. `cp newsletter/.env.example newsletter/.env`
+3. Set `ICAL_URLS` in `newsletter/.env` to a comma-separated list of iCal URLs
+   (in Google Calendar: Settings → your calendar → "Public address in iCal
+   format").
+
+Run:
+
+```sh
+cd newsletter
+uv run calendar-scrape.py
+```
+
+This writes `newsletter/events.txt`.

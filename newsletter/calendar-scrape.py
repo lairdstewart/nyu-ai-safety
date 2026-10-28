@@ -1,0 +1,86 @@
+import os
+import re
+import urllib.request
+from datetime import datetime, timedelta
+from html import unescape
+from zoneinfo import ZoneInfo
+
+import icalendar
+import recurring_ical_events
+from dotenv import load_dotenv
+
+EST = ZoneInfo("America/New_York")
+
+
+def to_datetime(value):
+    if isinstance(value, datetime):
+        return value.astimezone(EST)
+    return datetime(value.year, value.month, value.day, tzinfo=EST)
+
+
+def to_text(description):
+    """Convert Google Calendar's HTML descriptions to plain text."""
+    text = re.sub(r"(?i)<br\s*/?>", "\n", description)
+    text = re.sub(
+        r'(?is)<a\s[^>]*href="([^"]*)"[^>]*>(.*?)</a>', r"\2 (\1)", text
+    )
+    text = unescape(re.sub(r"<[^>]+>", "", text))
+    return re.sub(r"\n{3,}", "\n\n", text).strip()
+
+
+def fmt_date(d):
+    return d.strftime("%A, %B %-d")
+
+
+def fmt_time(dt):
+    return dt.strftime("%-I:%M %p")
+
+
+def fmt_when(event):
+    start = event.start
+    end = event.end
+
+    if not isinstance(start, datetime):
+        last = end - timedelta(days=1) if end > start else start
+        if last == start:
+            return f"{fmt_date(start)} (all day)"
+        return f"{fmt_date(start)} – {fmt_date(last)} (all day)"
+
+    start = start.astimezone(EST)
+    end = end.astimezone(EST)
+    if start.date() == end.date():
+        return f"{fmt_date(start)}, {fmt_time(start)} – {fmt_time(end)}"
+    return f"{fmt_date(start)}, {fmt_time(start)} – {fmt_date(end)}, {fmt_time(end)}"
+
+
+load_dotenv()
+now = datetime.now(EST)
+until = now + timedelta(days=15)
+
+events: list[icalendar.Event] = []
+for url in os.environ["ICAL_URLS"].split(","):
+    calendar = icalendar.Calendar.from_ical(
+        urllib.request.urlopen(url.strip()).read()
+    )
+    for event in recurring_ical_events.of(calendar).between(now, until):
+        if (
+            not isinstance(event, icalendar.Event)
+            or event.get("STATUS") == "CANCELLED"
+        ):
+            continue
+        if now <= to_datetime(event.start) < until:
+            events.append(event)
+
+events.sort(key=lambda e: to_datetime(e.start))
+
+parts = []
+for event in events:
+    parts.append(
+        f"{event.get('SUMMARY', '')}\n"
+        f"Date: {fmt_when(event)}\n"
+        f"Location: {event.get('LOCATION', '')}\n"
+        f"{to_text(str(event.get('DESCRIPTION', '')))}\n"
+    )
+
+with open("events.txt", "w") as f:
+    f.write("\n".join(parts))
