@@ -29,8 +29,8 @@ newsletter/ contains html templates for the newsletter. To send a newsletter
 
 ## calendar scraper
 
-`newsletter/calendar-scrape.py` turns upcoming calendar events into an HTML
-bullet list.
+`newsletter/calendar-scrape.py` turns upcoming calendar events into a plain
+text list.
 
 1. Install [uv](https://docs.astral.sh/uv/)
 2. `cp newsletter/.env.example newsletter/.env`
@@ -45,4 +45,4 @@ cd newsletter
 uv run calendar-scrape.py
 ```
 
-This writes `newsletter/events.html`.
+This writes `newsletter/events.txt`.

@@ -2,7 +2,7 @@ import os
 import re
 import urllib.request
 from datetime import datetime, timedelta
-from html import escape
+from html import unescape
 from zoneinfo import ZoneInfo
 
 import icalendar
@@ -16,6 +16,14 @@ def to_datetime(value):
     if isinstance(value, datetime):
         return value.astimezone(EST)
     return datetime(value.year, value.month, value.day, tzinfo=EST)
+
+
+def to_text(description):
+    """Convert Google Calendar's HTML descriptions to plain text."""
+    text = re.sub(r"(?i)<br\s*/?>", "\n", description)
+    text = re.sub(r'(?is)<a\s[^>]*href="([^"]*)"[^>]*>(.*?)</a>', r"\2 (\1)", text)
+    text = unescape(re.sub(r"<[^>]+>", "", text))
+    return re.sub(r"\n{3,}", "\n\n", text).strip()
 
 
 def fmt_date(d):
@@ -65,17 +73,12 @@ events.sort(key=lambda e: to_datetime(e.start))
 
 parts = []
 for event in events:
-    title = escape(str(event.get("SUMMARY", "")))
-    location = escape(str(event.get("LOCATION", "")))
-    description = " ".join(str(event.get("DESCRIPTION", "")).split())
     parts.append(
-        f"<h2>{title}</h2>\n"
-        "<ul>\n"
-        f"  <li>Time: {fmt_when(event)}</li>\n"
-        f"  <li>Location: {location}</li>\n"
-        f"  <li>Description: {description}</li>\n"
-        "</ul>\n"
+        f"Date: {fmt_when(event)}\n"
+        f"Location: {event.get('LOCATION', '')}\n"
+        f"Title: {event.get('SUMMARY', '')}\n"
+        f"Description: {to_text(str(event.get('DESCRIPTION', '')))}\n"
     )
 
-with open("events.html", "w") as f:
-    f.write("".join(parts))
+with open("events.txt", "w") as f:
+    f.write("\n".join(parts))
