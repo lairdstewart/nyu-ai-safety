@@ -1,6 +1,8 @@
 import os
+import re
 import urllib.request
 from datetime import datetime, timedelta
+from html import unescape
 from zoneinfo import ZoneInfo
 
 import icalendar
@@ -14,6 +16,14 @@ def to_datetime(value):
     if isinstance(value, datetime):
         return value.astimezone(EST)
     return datetime(value.year, value.month, value.day, tzinfo=EST)
+
+
+def to_text(description):
+    """Convert Google Calendar's HTML descriptions to plain text."""
+    text = re.sub(r"(?i)<br\s*/?>", "\n", description)
+    text = re.sub(r'(?is)<a\s[^>]*href="([^"]*)"[^>]*>(.*?)</a>', r"\2 (\1)", text)
+    text = unescape(re.sub(r"<[^>]+>", "", text))
+    return re.sub(r"\n{3,}", "\n\n", text).strip()
 
 
 def fmt_date(d):
@@ -67,7 +77,7 @@ for event in events:
         f"Date: {fmt_when(event)}\n"
         f"Location: {event.get('LOCATION', '')}\n"
         f"Title: {event.get('SUMMARY', '')}\n"
-        f"Description: {event.get('DESCRIPTION', '')}\n"
+        f"Description: {to_text(str(event.get('DESCRIPTION', '')))}\n"
     )
 
 with open("events.txt", "w") as f:
