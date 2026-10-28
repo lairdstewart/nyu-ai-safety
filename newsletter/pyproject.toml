@@ -1,0 +1,10 @@
+[project]
+name = "newsletter"
+version = "0.1.0"
+description = "Turn upcoming calendar events into HTML for the weekly newsletter"
+requires-python = ">=3.14"
+dependencies = [
+    "icalendar>=7.3.0",
+    "python-dotenv>=1.2.4",
+    "recurring-ical-events>=3.8.2",
+]
