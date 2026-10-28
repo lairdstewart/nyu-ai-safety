@@ -19,15 +19,22 @@ UI/UX goals
 
 # Newsletter
 
-`newsletter/` holds a script that turns upcoming calendar events (the next 30
-days, times shown in Eastern time) into plain HTML for the weekly newsletter.
-Recurring events are expanded, and cancelled or modified occurrences are
-respected.
+## Sending a newsletter
 
-Setup (requires [uv](https://docs.astral.sh/uv/)):
+newsletter/ contains html templates for the newsletter. To send a newsletter
 
-1. `cp newsletter/.env.example newsletter/.env`
-2. Set `ICAL_URLS` in `newsletter/.env` to a comma-separated list of iCal URLs
+1. Install Thunderbird
+2. TODO write the rest of these instructions
+3. Run the calendar scraper (instructions below) to gather events
+
+## calendar scraper
+
+`newsletter/calendar-scrape.py` turns upcoming calendar events into an HTML
+bullet list.
+
+1. Install [uv](https://docs.astral.sh/uv/)
+2. `cp newsletter/.env.example newsletter/.env`
+3. Set `ICAL_URLS` in `newsletter/.env` to a comma-separated list of iCal URLs
    (in Google Calendar: Settings → your calendar → "Secret address in iCal
    format" or "Public address in iCal format").
 

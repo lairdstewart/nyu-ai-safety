@@ -48,10 +48,13 @@ until = now + timedelta(days=30)
 
 events = []
 for url in os.environ["ICAL_URLS"].split(","):
-    calendar = icalendar.Calendar.from_ical(urllib.request.urlopen(url.strip()).read())
+    calendar = icalendar.Calendar.from_ical(
+        urllib.request.urlopen(url.strip()).read()
+    )
     for event in recurring_ical_events.of(calendar).between(now, until):
         if event.get("STATUS") == "CANCELLED":
             continue
+        # CLAUDE: my LSP gives me an error that attribute dt is unknown. can you fix this?
         if now <= to_datetime(event["DTSTART"].dt) < until:
             events.append(event)
 
@@ -72,9 +75,5 @@ for event in events:
     )
 
 with open("events.html", "w") as f:
-    f.write(
-        '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
-        "<title>Upcoming Events</title>\n</head>\n<body>\n"
-        + "".join(parts)
-        + "</body>\n</html>\n"
-    )
+    # CLAUDE: confirm i did this right -- i don't need any of the frills just the <ul> list
+    f.write("".join(parts))
