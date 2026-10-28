@@ -21,7 +21,9 @@ def to_datetime(value):
 def to_text(description):
     """Convert Google Calendar's HTML descriptions to plain text."""
     text = re.sub(r"(?i)<br\s*/?>", "\n", description)
-    text = re.sub(r'(?is)<a\s[^>]*href="([^"]*)"[^>]*>(.*?)</a>', r"\2 (\1)", text)
+    text = re.sub(
+        r'(?is)<a\s[^>]*href="([^"]*)"[^>]*>(.*?)</a>', r"\2 (\1)", text
+    )
     text = unescape(re.sub(r"<[^>]+>", "", text))
     return re.sub(r"\n{3,}", "\n\n", text).strip()
 
@@ -53,7 +55,7 @@ def fmt_when(event):
 
 load_dotenv()
 now = datetime.now(EST)
-until = now + timedelta(days=30)
+until = now + timedelta(days=15)
 
 events: list[icalendar.Event] = []
 for url in os.environ["ICAL_URLS"].split(","):
@@ -74,10 +76,10 @@ events.sort(key=lambda e: to_datetime(e.start))
 parts = []
 for event in events:
     parts.append(
+        f"{event.get('SUMMARY', '')}\n"
         f"Date: {fmt_when(event)}\n"
         f"Location: {event.get('LOCATION', '')}\n"
-        f"Title: {event.get('SUMMARY', '')}\n"
-        f"Description: {to_text(str(event.get('DESCRIPTION', '')))}\n"
+        f"{to_text(str(event.get('DESCRIPTION', '')))}\n"
     )
 
 with open("events.txt", "w") as f:
