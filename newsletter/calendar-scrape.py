@@ -1,4 +1,5 @@
 import os
+import re
 import urllib.request
 from datetime import datetime, timedelta
 from html import escape
@@ -63,7 +64,10 @@ parts = []
 for event in events:
     title = escape(str(event.get("SUMMARY", "")))
     location = escape(str(event.get("LOCATION", "")))
-    description = escape(" ".join(str(event.get("DESCRIPTION", "")).split()))
+    description = " ".join(str(event.get("DESCRIPTION", "")).split())
+    # Google Calendar stores rich-text descriptions as HTML; keep those as-is.
+    if not re.search(r"<[a-zA-Z][^>]*>", description):
+        description = escape(description)
     parts.append(
         f"<h2>{title}</h2>\n"
         "<ul>\n"
