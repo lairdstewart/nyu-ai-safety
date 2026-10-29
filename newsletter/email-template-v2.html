@@ -1,156 +1,605 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="x-apple-disable-message-reformatting">
-<title>NYU AI Safety newsletter</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" type="text/css">
-<style type="text/css">
-  body { margin: 0; padding: 0; background: #FAFAF9; }
-  table { border-collapse: collapse; }
-  img { border: 0; outline: none; text-decoration: none; }
-  a { color: #57068C; }
-  ul { margin: 0 0 16px; padding-left: 22px; }
-  li { margin: 0 0 10px; font-family: Montserrat, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 25px; color: #330662; }
-  @media only screen and (max-width: 620px) {
-    .container { width: 100% !important; }
-    .px { padding-left: 20px !important; padding-right: 20px !important; }
-    .col { display: block !important; width: 100% !important; padding: 0 0 16px 0 !important; }
-    .col img { width: 100% !important; max-width: 100% !important; }
-    .h1 { font-size: 30px !important; line-height: 36px !important; }
-    .h2 { font-size: 25px !important; line-height: 31px !important; }
-  }
-</style>
-</head>
-<body style="margin: 0;padding: 0;background: #FAFAF9;">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="x-apple-disable-message-reformatting" />
+    <!-- We supply our own dark-mode colors, so clients shouldn't auto-recolor -->
+    <meta name="color-scheme" content="light dark" />
+    <meta name="supported-color-schemes" content="light dark" />
+    <title>Weekly Bulletin</title>
+    <style type="text/css">
+      :root {
+        color-scheme: light dark;
+        supported-color-schemes: light dark;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        background: #f3f2f0;
+      }
+      a {
+        color: #57068c;
+      }
+      @media only screen and (max-width: 620px) {
+        .px {
+          padding-left: 20px !important;
+          padding-right: 20px !important;
+        }
+        .logo-desktop {
+          display: none !important;
+        }
+        .logo-mobile {
+          display: block !important;
+          max-height: none !important;
+          overflow: visible !important;
+        }
+        .h1 {
+          font-size: 30px !important;
+          line-height: 36px !important;
+        }
+        .h2 {
+          font-size: 25px !important;
+          line-height: 31px !important;
+        }
+      }
+      /* Header and footer stay dark purple, so the white logo still works */
+      @media (prefers-color-scheme: dark) {
+        body,
+        .dm-page {
+          background: #121014 !important;
+        }
+        .dm-surface {
+          background: #1c1722 !important;
+        }
+        .dm-text {
+          color: #ebe5f2 !important;
+        }
+        .dm-accent {
+          color: #cfb2ef !important;
+        }
+        .dm-tint {
+          background: #2a2135 !important;
+        }
+        .dm-rule {
+          border-top-color: #8a63b8 !important;
+        }
+        .dm-card {
+          border-color: #3e3349 !important;
+        }
+        .dm-button {
+          background: #7a3fc2 !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="dm-page" style="margin: 0; padding: 0; background: #f3f2f0">
+    <table
+      class="dm-page"
+      role="presentation"
+      width="100%"
+      style="width: 100%; border-collapse: collapse; background: #f3f2f0"
+    >
+      <tr>
+        <td style="padding: 24px 12px">
+          <!-- ===== CONTAINER ===== -->
+          <!-- Fluid up to 600px; Outlook ignores max-width, so pin it there -->
+          <!--[if mso]>
+          <table role="presentation" width="600" align="center"><tr><td>
+          <![endif]-->
+          <table
+            class="dm-surface"
+            role="presentation"
+            width="100%"
+            style="
+              width: 100%;
+              max-width: 600px;
+              margin: 0 auto;
+              border-collapse: collapse;
+              background: #ffffff;
+            "
+          >
+            <!-- ===== MASTHEAD ===== -->
+            <tr>
+              <td class="px" style="background: #330662; padding: 16px 32px">
+                <table
+                  role="presentation"
+                  width="100%"
+                  style="width: 100%; border-collapse: collapse"
+                >
+                  <tr>
+                    <td valign="middle" style="vertical-align: middle">
+                      <p
+                        style="
+                          margin: 0;
+                          font-family: Montserrat, Helvetica, Arial, sans-serif;
+                          font-size: 20px;
+                          line-height: 26px;
+                          font-weight: 600;
+                          color: #fafaf9;
+                        "
+                      >
+                        Weekly Bulletin
+                      </p>
+                      <p
+                        style="
+                          margin: 4px 0 0;
+                          font-family: Montserrat, Helvetica, Arial, sans-serif;
+                          font-size: 14px;
+                          line-height: 20px;
+                          color: #fafaf9;
+                        "
+                      >
+                        October 28, 2026
+                      </p>
+                    </td>
+                    <td
+                      align="right"
+                      valign="middle"
+                      style="vertical-align: middle; padding-left: 16px"
+                    >
+                      <img
+                        class="logo-desktop"
+                        src="file:///Users/laird/code/nyu-ai-safety/logo/combination-mark-white-no-background.png"
+                        width="211"
+                        height="48"
+                        alt="NYU AI Safety Association logo"
+                        align="right"
+                        style="
+                          display: block;
+                          width: 211px;
+                          height: 48px;
+                          border: 0;
+                          outline: none;
+                          text-decoration: none;
+                        "
+                      />
+                      <!-- Hidden by default; shown at mobile widths -->
+                      <div
+                        class="logo-mobile"
+                        style="
+                          display: none;
+                          mso-hide: all;
+                          max-height: 0;
+                          overflow: hidden;
+                        "
+                      >
+                        <img
+                          src="file:///Users/laird/code/nyu-ai-safety/logo/symbol-mark-white-no-background.png"
+                          width="41"
+                          height="48"
+                          alt="NYU AI Safety Association logo"
+                          align="right"
+                          style="
+                            display: block;
+                            width: 41px;
+                            height: 48px;
+                            border: 0;
+                            outline: none;
+                            text-decoration: none;
+                          "
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
 
-<!-- Preview text (set it in Mailchimp's campaign settings) -->
-<p style="display: none; font-size: 1px; line-height: 1px; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; color: #330662; margin: 0;">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+            <!-- ===== WELCOME ===== -->
+            <tr>
+              <td class="px" style="padding: 40px 32px 16px">
+                <h1
+                  class="h1 dm-text"
+                  style="
+                    margin: 0 0 16px;
+                    font-family: Montserrat, Helvetica, Arial, sans-serif;
+                    font-size: 36px;
+                    line-height: 42px;
+                    font-weight: 400;
+                    color: #330662;
+                  "
+                >
+                  Lorem ipsum dolor sit amet
+                </h1>
+                <p
+                  class="dm-text"
+                  style="
+                    margin: 0;
+                    font-family: Montserrat, Helvetica, Arial, sans-serif;
+                    font-size: 16px;
+                    line-height: 25px;
+                    color: #330662;
+                  "
+                >
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation.
+                </p>
+              </td>
+            </tr>
 
-<table width="100%" style="width: 100%; border-collapse: collapse; background: #FAFAF9;">
-<tr>
-<td style="padding: 24px 12px;">
+            <!-- Highlight block -->
+            <tr>
+              <td class="px" style="padding: 8px 32px 24px">
+                <table
+                  role="presentation"
+                  width="100%"
+                  style="width: 100%; border-collapse: collapse"
+                >
+                  <tr>
+                    <td
+                      class="dm-tint"
+                      style="
+                        background: #eee6f3;
+                        padding: 24px 24px 12px;
+                        border-radius: 10px;
+                      "
+                    >
+                      <p
+                        class="dm-accent"
+                        style="
+                          margin: 0 0 12px;
+                          font-family: Montserrat, Helvetica, Arial, sans-serif;
+                          font-size: 12px;
+                          line-height: 16px;
+                          letter-spacing: 1.5px;
+                          text-transform: uppercase;
+                          color: #57068c;
+                        "
+                      >
+                        Lorem ipsum
+                      </p>
+                      <p
+                        class="dm-text"
+                        style="
+                          margin: 0 0 16px;
+                          font-family: Montserrat, Helvetica, Arial, sans-serif;
+                          font-size: 16px;
+                          line-height: 25px;
+                          color: #330662;
+                        "
+                      >
+                        Duis aute irure dolor in
+                        <strong>reprehenderit</strong> in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur.
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
 
-<!-- ===== CONTAINER ===== -->
-<table class="container" width="400" style="width: 600px; max-width: 600px; margin: 0 auto; border-collapse: collapse; background: #FFFFFF;">
+            <!-- ===== SECTION ===== -->
+            <tr>
+              <td class="px" style="padding: 24px 32px 8px">
+                <table
+                  role="presentation"
+                  width="100%"
+                  style="width: 100%; border-collapse: collapse"
+                >
+                  <tr>
+                    <td
+                      class="dm-rule"
+                      style="border-top: 6px solid #330662; padding: 20px 0 0"
+                    >
+                      <h2
+                        class="h2 dm-text"
+                        style="
+                          margin: 0 0 20px;
+                          font-family: Montserrat, Helvetica, Arial, sans-serif;
+                          font-size: 28px;
+                          line-height: 34px;
+                          font-weight: 400;
+                          color: #330662;
+                        "
+                      >
+                        Consectetur adipiscing
+                      </h2>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
 
-<!-- ===== MASTHEAD ===== -->
-<tr>
-<td class="px" style="background: #330662; padding: 28px 32px;">
-<img src="../logo/rectangle-white-no-background.png" width="211" height="48" alt="NYU AI Safety Association" style="display: block;width: 211px;height: 48px;border: 0;outline: none;text-decoration: none;">
-<p style="margin: 12px 0 0; font-family: Montserrat, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20px; color: #fafaf9 ;">Issue 1 &middot; October 2026</p>
-</td>
-</tr>
+            <!-- Image -->
+            <tr>
+              <td class="px" style="padding: 0 32px 20px">
+                <img
+                  src="file:///Users/laird/code/nyu-ai-safety/newsletter/images/placeholder.png"
+                  width="536"
+                  alt="Placeholder image"
+                  style="
+                    display: block;
+                    width: 100%;
+                    max-width: 536px;
+                    height: auto;
+                    border: 0;
+                    border-radius: 6px;
+                    outline: none;
+                    text-decoration: none;
+                  "
+                />
+              </td>
+            </tr>
 
-<!-- ===== WELCOME ===== -->
-<tr>
-<td class="px" style="padding: 40px 32px 16px;">
-<h1 class="h1" style="margin: 0 0 16px; font-family: Montserrat, Helvetica, Arial, sans-serif; font-size: 36px; line-height: 42px; font-weight: 400; color: #330662;">Lorem ipsum dolor sit amet</h1>
-<p style="margin: 0; font-family: Montserrat, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 25px; color: #330662;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
-</td>
-</tr>
+            <tr>
+              <td class="px" style="padding: 0 32px 8px">
+                <p
+                  class="dm-text"
+                  style="
+                    margin: 0 0 16px;
+                    font-family: Montserrat, Helvetica, Arial, sans-serif;
+                    font-size: 16px;
+                    line-height: 25px;
+                    color: #330662;
+                  "
+                >
+                  Excepteur sint occaecat cupidatat non proident, sunt in culpa
+                  qui officia deserunt mollit anim id est
+                  <a class="dm-accent" href="#" style="color: #57068c"
+                    >laborum</a
+                  >.
+                </p>
+                <h3
+                  class="dm-text"
+                  style="
+                    margin: 24px 0 8px;
+                    font-family: Montserrat, Helvetica, Arial, sans-serif;
+                    font-size: 20px;
+                    line-height: 26px;
+                    font-weight: 400;
+                    color: #330662;
+                  "
+                >
+                  Sed ut perspiciatis
+                </h3>
+                <ul style="margin: 0 0 16px; padding-left: 22px">
+                  <li
+                    class="dm-text"
+                    style="
+                      margin: 0 0 10px;
+                      font-family: Montserrat, Helvetica, Arial, sans-serif;
+                      font-size: 16px;
+                      line-height: 25px;
+                      color: #330662;
+                    "
+                  >
+                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur.
+                  </li>
+                  <li
+                    class="dm-text"
+                    style="
+                      margin: 0 0 10px;
+                      font-family: Montserrat, Helvetica, Arial, sans-serif;
+                      font-size: 16px;
+                      line-height: 25px;
+                      color: #330662;
+                    "
+                  >
+                    Neque porro quisquam est, qui dolorem ipsum quia dolor sit
+                    amet.
+                  </li>
+                </ul>
+                <table
+                  role="presentation"
+                  style="border-collapse: collapse; margin: 0 0 24px"
+                >
+                  <tr>
+                    <td
+                      class="dm-button"
+                      style="background: #330662; border-radius: 6px"
+                    >
+                      <a
+                        href="#"
+                        target="_blank"
+                        style="
+                          display: inline-block;
+                          padding: 12px 24px;
+                          font-family: Montserrat, Helvetica, Arial, sans-serif;
+                          font-size: 16px;
+                          line-height: 20px;
+                          color: #fafaf9;
+                          text-decoration: none;
+                          border-radius: 6px;
+                        "
+                        >Lorem ipsum</a
+                      >
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
 
-<!-- Highlight block -->
-<tr>
-<td class="px" style="padding: 8px 32px 24px;">
-<table width="100%" style="width: 100%; border-collapse: collapse;">
-<tr>
-<td style="background: #EEE6F3; padding: 24px 24px 12px; border-radius: 10px;">
-<p style="margin: 0 0 12px; font-family: Montserrat, Helvetica, Arial, sans-serif; font-size: 12px; line-height: 16px; font-weight: 400; letter-spacing: 1.5px; text-transform: uppercase; color: #57068C;">Lorem ipsum</p>
-<p style="margin: 0 0 16px; font-family: Montserrat, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 25px; color: #330662;">Duis aute irure dolor in <strong>reprehenderit</strong> in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-</td>
-</tr>
-</table>
-</td>
-</tr>
+            <!-- Quote block -->
+            <tr>
+              <td class="px" style="padding: 0 32px 16px">
+                <table
+                  role="presentation"
+                  width="100%"
+                  style="width: 100%; border-collapse: collapse"
+                >
+                  <tr>
+                    <td
+                      class="dm-tint"
+                      style="
+                        background: #eee6f3;
+                        border-radius: 10px;
+                        padding: 24px 24px 14px;
+                      "
+                    >
+                      <p
+                        class="dm-text"
+                        style="
+                          margin: 0 0 10px;
+                          font-family: Montserrat, Helvetica, Arial, sans-serif;
+                          font-size: 16px;
+                          line-height: 26px;
+                          font-style: italic;
+                          color: #330662;
+                        "
+                      >
+                        &ldquo;Ut enim ad minima veniam, quis nostrum
+                        exercitationem ullam corporis.&rdquo;
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
 
-<!-- ===== SECTION ===== -->
-<tr>
-<td class="px" style="padding: 24px 32px 8px;">
-<table width="100%" style="width: 100%; border-collapse: collapse;">
-<tr><td style="border-top: 6px solid #330662; padding: 20px 0 0;">
-<h2 class="h2" style="margin: 0 0 20px; font-family: Montserrat, Helvetica, Arial, sans-serif; font-size: 28px; line-height: 34px; font-weight: 400; color: #330662;">Consectetur adipiscing</h2>
-</td></tr>
-</table>
-</td>
-</tr>
+            <!-- Card -->
+            <tr>
+              <td class="px" style="padding: 0 32px 32px">
+                <table
+                  role="presentation"
+                  width="100%"
+                  style="
+                    width: 100%;
+                    border-collapse: separate;
+                    border-spacing: 0;
+                  "
+                >
+                  <tr>
+                    <td
+                      class="dm-card"
+                      style="
+                        border: 1px solid #d9cde3;
+                        border-radius: 10px;
+                        padding: 24px;
+                      "
+                    >
+                      <h3
+                        class="dm-text"
+                        style="
+                          margin: 0 0 10px;
+                          font-family: Montserrat, Helvetica, Arial, sans-serif;
+                          font-size: 22px;
+                          line-height: 28px;
+                          font-weight: 400;
+                          color: #330662;
+                        "
+                      >
+                        Quis autem vel eum
+                      </h3>
+                      <p
+                        class="dm-text"
+                        style="
+                          margin: 0 0 12px;
+                          font-family: Montserrat, Helvetica, Arial, sans-serif;
+                          font-size: 16px;
+                          line-height: 25px;
+                          color: #330662;
+                        "
+                      >
+                        Iure reprehenderit qui in ea voluptate velit esse quam
+                        nihil molestiae consequatur.
+                      </p>
+                      <p
+                        class="dm-text"
+                        style="
+                          margin: 0 0 4px;
+                          font-family: Montserrat, Helvetica, Arial, sans-serif;
+                          font-size: 15px;
+                          line-height: 22px;
+                          color: #330662;
+                        "
+                      >
+                        <strong>Lorem ipsum:</strong> Dolor sit amet
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
 
-<!-- Image -->
-<tr>
-<td class="px" style="padding: 0 32px 20px;">
-<img src="images/placeholder.png" width="536" alt="Placeholder image" style="display: block;width: 100%;max-width: 536px;height: auto;border: 0;border-radius: 6px;outline: none;text-decoration: none;">
-</td>
-</tr>
+            <!-- ===== SIGN-OFF ===== -->
+            <tr>
+              <td class="px" style="padding: 8px 32px 40px">
+                <p
+                  class="dm-text"
+                  style="
+                    margin: 0 0 16px;
+                    font-family: Montserrat, Helvetica, Arial, sans-serif;
+                    font-size: 16px;
+                    line-height: 25px;
+                    color: #330662;
+                  "
+                >
+                  At vero eos et accusamus et iusto odio dignissimos ducimus qui
+                  blanditiis praesentium voluptatum deleniti atque corrupti.
+                </p>
+              </td>
+            </tr>
 
-<tr>
-<td class="px" style="padding: 0 32px 8px;">
-<p style="margin: 0 0 16px; font-family: Montserrat, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 25px; color: #330662;">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est <a href="#" style="color: #57068C; text-decoration: underline; font-weight: 400;">laborum</a>.</p>
-<h3 style="margin: 24px 0 8px; font-family: Montserrat, Helvetica, Arial, sans-serif; font-size: 20px; line-height: 26px; font-weight: 400; color: #330662;">Sed ut perspiciatis</h3>
-<ul style="margin: 0 0 16px;padding-left: 22px;">
-<li style="margin: 0 0 10px;font-family: Montserrat, Helvetica, Arial, sans-serif;font-size: 16px;line-height: 25px;color: #330662;">Nemo enim ipsam voluptatem quia voluptas sit aspernatur.</li>
-<li style="margin: 0 0 10px;font-family: Montserrat, Helvetica, Arial, sans-serif;font-size: 16px;line-height: 25px;color: #330662;">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.</li>
-</ul>
-<table style="border-collapse: collapse; margin: 0 0 24px;">
-<tr>
-<td style="background: #330662; border-radius: 6px;">
-<a href="#" target="_blank" style="display: inline-block; padding: 12px 24px; font-family: Montserrat, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 20px; font-weight: 400; color: #fafaf9; text-decoration: none; border-radius: 6px;">Lorem ipsum</a>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-
-<!-- Quote block -->
-<tr>
-<td class="px" style="padding: 0 32px 16px;">
-<table width="100%" style="width: 100%; border-collapse: collapse;">
-<tr>
-<td style="background: #EEE6F3; border-radius: 10px; padding: 24px 24px 14px;">
-<p style="margin: 0 0 10px; font-family: Montserrat, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 26px; font-style: italic; color: #330662;">&ldquo;Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis.&rdquo;</p>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-
-<!-- Card -->
-<tr>
-<td class="px" style="padding: 0 32px 32px;">
-<table width="100%" style="width: 100%; border-collapse: separate; border-spacing: 0;">
-<tr>
-<td style="border: 1px solid #33066226; border-radius: 10px; padding: 24px;">
-<h3 style="margin: 0 0 10px; font-family: Montserrat, Helvetica, Arial, sans-serif; font-size: 22px; line-height: 28px; font-weight: 400; color: #330662;">Quis autem vel eum</h3>
-<p style="margin: 0 0 12px; font-family: Montserrat, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 25px; color: #330662;">Iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.</p>
-<p style="margin: 0 0 4px; font-family: Montserrat, Helvetica, Arial, sans-serif; font-size: 15px; line-height: 22px; color: #330662;"><strong>Lorem ipsum:</strong> Dolor sit amet</p>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-
-<!-- ===== SIGN-OFF ===== -->
-<tr>
-<td class="px" style="padding: 8px 32px 40px;">
-<p style="margin: 0 0 16px; font-family: Montserrat, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 25px; color: #330662;">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti.</p>
-</td>
-</tr>
-
-<!-- ===== FOOTER ===== -->
-<tr>
-<td class="px" style="padding: 28px 32px 32px; background: #330662 ;">
-<p style="margin: 0 0 8px; font-family: Montserrat, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20px; color: #FAFAF9;"><a href="#" style="color: #FAFAF9; text-decoration: underline; font-weight: 400;">LinkedIn</a> &nbsp;&middot;&nbsp; <a href="#" style="color: #FAFAF9; text-decoration: underline; font-weight: 400;">arcadiaimpact.org</a></p>
-<p style="margin: 0 0 8px; font-family: Montserrat, Helvetica, Arial, sans-serif; font-size: 13px; line-height: 19px; color: #FAFAF9;">You&rsquo;re receiving this because you signed up to the Arcadia Impact mailing list.</p>
-<p style="margin: 0 0 8px; font-family: Montserrat, Helvetica, Arial, sans-serif; font-size: 13px; line-height: 19px; color: #FAFAF9;"><a href="#" style="color: #FAFAF9; text-decoration: underline;">Manage communication preferences</a> &nbsp;&middot;&nbsp; <a href="#" style="color: #FAFAF9; text-decoration: underline;">Unsubscribe</a></p>
-<p style="margin: 0; font-family: Montserrat, Helvetica, Arial, sans-serif; font-size: 13px; line-height: 19px; color: #FAFAF9;">Arcadia Impact &middot; 34-35 Hatton Garden &middot; London, London EC1N 8DX &middot; United Kingdom</p>
-</td>
-</tr>
-
-</table>
-<!-- ===== /CONTAINER ===== -->
-
-</td>
-</tr>
-</table>
-</body>
+            <!-- ===== FOOTER ===== -->
+            <tr>
+              <td
+                class="px"
+                style="padding: 16px 32px 16px; background: #330662"
+              >
+                <p
+                  style="
+                    margin: 0 0 8px;
+                    font-family: Montserrat, Helvetica, Arial, sans-serif;
+                    font-size: 14px;
+                    line-height: 20px;
+                    color: #fafaf9;
+                  "
+                >
+                  <a
+                    href="https://www.linkedin.com/company/nyu-ai-safety/"
+                    style="color: #fafaf9"
+                    >LinkedIn</a
+                  >
+                  &nbsp;&middot;&nbsp;
+                  <a href="https://discord.gg/bugZDzTjgu" style="color: #fafaf9"
+                    >Discord</a
+                  >
+                  &nbsp;&middot;&nbsp;
+                  <a href="https://nyuaisafety.org/" style="color: #fafaf9"
+                    >nyuaisafety.org</a
+                  >
+                </p>
+                <p
+                  style="
+                    margin: 0 0 8px;
+                    font-family: Montserrat, Helvetica, Arial, sans-serif;
+                    font-size: 13px;
+                    line-height: 19px;
+                    color: #fafaf9;
+                  "
+                >
+                  No longer want to receive these emails? (<a
+                    href="https://airtable.com/appcWbfaNZZCbAt3X/pagWhByk382lufnmL/form"
+                    style="color: #fafaf9"
+                    >Unsubscribe here</a
+                  >) Forwarded this email? (<a
+                    href="https://airtable.com/appwabH62gUU5lX3R/pagWhByk382lufnmL/form"
+                    style="color: #fafaf9"
+                    >Subscribe here</a
+                  >)
+                </p>
+                <p
+                  style="
+                    margin: 0;
+                    font-family: Montserrat, Helvetica, Arial, sans-serif;
+                    font-size: 13px;
+                    line-height: 19px;
+                    color: #fafaf9;
+                  "
+                >
+                  NYU AI Safety Association &middot; New York, NY
+                </p>
+              </td>
+            </tr>
+          </table>
+          <!--[if mso]>
+          </td></tr></table>
+          <![endif]-->
+          <!-- ===== /CONTAINER ===== -->
+        </td>
+      </tr>
+    </table>
+  </body>
 </html>
