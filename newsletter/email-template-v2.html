@@ -58,6 +58,15 @@
         .dm-accent {
           color: #cfb2ef !important;
         }
+        /* Plain links (e.g. added with Ctrl+K) in the body */
+        .dm-surface a {
+          color: #cfb2ef !important;
+        }
+        /* ...but keep footer and button links white */
+        .dm-footer a,
+        .dm-button a {
+          color: #fafaf9 !important;
+        }
         .dm-tint {
           background: #2a2135 !important;
         }
@@ -186,9 +195,10 @@
               </td>
             </tr>
 
-            <!-- ===== WELCOME ===== -->
+            <!-- ===== CONTENT ===== -->
             <tr>
-              <td class="px" style="padding: 40px 32px 16px">
+              <td class="px" style="padding: 40px 32px 40px">
+                <!-- ===== WELCOME ===== -->
                 <h1
                   class="h1 dm-text"
                   style="
@@ -200,7 +210,7 @@
                     color: #330662;
                   "
                 >
-                  Lorem ipsum dolor sit amet
+                  h1 heading
                 </h1>
                 <p
                   class="dm-text"
@@ -212,16 +222,10 @@
                     color: #330662;
                   "
                 >
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation.
+                  body text ... body text ... body text ... body text ... body
+                  text ...
                 </p>
-              </td>
-            </tr>
-
-            <!-- Highlight block -->
-            <tr>
-              <td class="px" style="padding: 8px 32px 24px">
+                <!-- Highlight block -->
                 <table
                   role="presentation"
                   width="100%"
@@ -267,12 +271,7 @@
                     </td>
                   </tr>
                 </table>
-              </td>
-            </tr>
-
-            <!-- ===== SECTION ===== -->
-            <tr>
-              <td class="px" style="padding: 24px 32px 8px">
+                <!-- ===== SECTION ===== -->
                 <table
                   role="presentation"
                   width="100%"
@@ -294,17 +293,12 @@
                           color: #330662;
                         "
                       >
-                        Consectetur adipiscing
+                        h2 heading
                       </h2>
                     </td>
                   </tr>
                 </table>
-              </td>
-            </tr>
-
-            <!-- Image -->
-            <tr>
-              <td class="px" style="padding: 0 32px 20px">
+                <!-- Image -->
                 <img
                   src="file:///Users/laird/code/nyu-ai-safety/newsletter/images/placeholder.png"
                   width="536"
@@ -320,27 +314,6 @@
                     text-decoration: none;
                   "
                 />
-              </td>
-            </tr>
-
-            <tr>
-              <td class="px" style="padding: 0 32px 8px">
-                <p
-                  class="dm-text"
-                  style="
-                    margin: 0 0 16px;
-                    font-family: Montserrat, Helvetica, Arial, sans-serif;
-                    font-size: 16px;
-                    line-height: 25px;
-                    color: #330662;
-                  "
-                >
-                  Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                  qui officia deserunt mollit anim id est
-                  <a class="dm-accent" href="#" style="color: #57068c"
-                    >laborum</a
-                  >.
-                </p>
                 <h3
                   class="dm-text"
                   style="
@@ -352,7 +325,7 @@
                     color: #330662;
                   "
                 >
-                  Sed ut perspiciatis
+                  h3 heading
                 </h3>
                 <ul style="margin: 0 0 16px; padding-left: 22px">
                   <li
@@ -365,7 +338,7 @@
                       color: #330662;
                     "
                   >
-                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur.
+                    bullet list point 1
                   </li>
                   <li
                     class="dm-text"
@@ -377,8 +350,7 @@
                       color: #330662;
                     "
                   >
-                    Neque porro quisquam est, qui dolorem ipsum quia dolor sit
-                    amet.
+                    bullet list poinat 2
                   </li>
                 </ul>
                 <table
@@ -403,54 +375,12 @@
                           text-decoration: none;
                           border-radius: 6px;
                         "
-                        >Lorem ipsum</a
+                        >button!</a
                       >
                     </td>
                   </tr>
                 </table>
-              </td>
-            </tr>
-
-            <!-- Quote block -->
-            <tr>
-              <td class="px" style="padding: 0 32px 16px">
-                <table
-                  role="presentation"
-                  width="100%"
-                  style="width: 100%; border-collapse: collapse"
-                >
-                  <tr>
-                    <td
-                      class="dm-tint"
-                      style="
-                        background: #eee6f3;
-                        border-radius: 10px;
-                        padding: 24px 24px 14px;
-                      "
-                    >
-                      <p
-                        class="dm-text"
-                        style="
-                          margin: 0 0 10px;
-                          font-family: Montserrat, Helvetica, Arial, sans-serif;
-                          font-size: 16px;
-                          line-height: 26px;
-                          font-style: italic;
-                          color: #330662;
-                        "
-                      >
-                        &ldquo;Ut enim ad minima veniam, quis nostrum
-                        exercitationem ullam corporis.&rdquo;
-                      </p>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-
-            <!-- Card -->
-            <tr>
-              <td class="px" style="padding: 0 32px 32px">
+                <!-- Card -->
                 <table
                   role="presentation"
                   width="100%"
@@ -513,29 +443,10 @@
               </td>
             </tr>
 
-            <!-- ===== SIGN-OFF ===== -->
-            <tr>
-              <td class="px" style="padding: 8px 32px 40px">
-                <p
-                  class="dm-text"
-                  style="
-                    margin: 0 0 16px;
-                    font-family: Montserrat, Helvetica, Arial, sans-serif;
-                    font-size: 16px;
-                    line-height: 25px;
-                    color: #330662;
-                  "
-                >
-                  At vero eos et accusamus et iusto odio dignissimos ducimus qui
-                  blanditiis praesentium voluptatum deleniti atque corrupti.
-                </p>
-              </td>
-            </tr>
-
             <!-- ===== FOOTER ===== -->
             <tr>
               <td
-                class="px"
+                class="px dm-footer"
                 style="padding: 16px 32px 16px; background: #330662"
               >
                 <p
@@ -570,15 +481,19 @@
                     color: #fafaf9;
                   "
                 >
-                  No longer want to receive these emails? (<a
+                  No longer want to receive these emails?
+                  <a
                     href="https://airtable.com/appcWbfaNZZCbAt3X/pagWhByk382lufnmL/form"
                     style="color: #fafaf9"
-                    >Unsubscribe here</a
-                  >) Forwarded this email? (<a
+                    >Unsubscribe</a
+                  >
+                  <br />
+                  Forwarded this email?
+                  <a
                     href="https://airtable.com/appwabH62gUU5lX3R/pagWhByk382lufnmL/form"
                     style="color: #fafaf9"
-                    >Subscribe here</a
-                  >)
+                    >Subscribe</a
+                  >
                 </p>
                 <p
                   style="
