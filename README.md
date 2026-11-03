@@ -23,10 +23,28 @@ UI/UX goals
 
 newsletter/ contains html templates for the newsletter. To send a newsletter
 
-1. Install Thunderbird
-2. TODO write the rest of these instructions
-3. Run the calendar scraper (instructions below) to gather events
-4. Change local path to logo to absolute path (e.g., file:///Users/foo/rectangle-white-purple-background.png)
+1. Install Thunderbird, log into nyuaisafety@gmail.com account
+2. Install mail merge plugin
+3. Update email list with new entries from Airtable
+4. Download email list as .csv
+5. Make a copy of ./newsletter/weekly-bulletin-template-v2.html and Change local
+   path of logo to absolute path (e.g.,
+   file:///Users/foo/rectangle-white-purple-background.png)
+6. Create a new email with {{Email}} in "To" field
+7. Insert > HTML > select template
+8. Draft the email by editing the template directly in Thunderbird. You can copy
+   and paste headings/sections of the template
+9. Click the mail merge button in the top right
+10. Select Source: CSV > select the email list file
+11. Keep Deliver Mode to "Send Later"
+12. Click send, then confirm
+13. In Local Folders > Outbox, confirm that the messages look correct
+14. File --> send unsent messages
+
+## Bulletin sources
+
+- Slack
+  - Blue dot opportunities channel
 
 ## calendar scraper
 
