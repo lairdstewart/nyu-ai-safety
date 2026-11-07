@@ -339,3 +339,53 @@ main h1 {
   /* under the ~2.2rem the desktop row works out to at its 46em cap */
   .support-logos img { width: auto; height: 2rem; }
 }
+
+/* ---- organizer / advisor list ---- */
+/* 13em columns: three across at the 46em article cap, fewer as it narrows */
+.people {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(13em, 1fr));
+  gap: 1.25em 1em;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.person { display: flex; align-items: center; gap: 1em; }
+.person img {
+  flex: none;
+  width: 4.5em;
+  height: 4.5em;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--tint-top);   /* holds the circle's place while the photo loads */
+}
+.person p { margin: 0; line-height: 1.4; }
+.person .name { font-size: 1.05em; }
+.person .title { font-size: 0.85em; }
+
+/* the icon row under each title: each svg is a mask, so only its shape is used
+   and the icon takes the link's color, whatever fill the file was drawn in */
+.person .links { display: flex; gap: 0.6em; margin-top: 0.3em; }
+.person .links a {
+  display: block;
+  width: 1.1em;
+  height: 1.1em;
+  color: #333333;
+  background: currentColor;
+  -webkit-mask: var(--icon) no-repeat center / contain;
+  mask: var(--icon) no-repeat center / contain;
+}
+.person .links a:hover { color: var(--nyu-violet); }
+.icon-site     { --icon: url("assets/globe-wire.svg"); }
+.icon-email    { --icon: url("assets/mail.svg"); }
+.icon-calendar { --icon: url("assets/calendar.svg"); }
+
+@media (max-width: 59.99em) {
+  /* columns as wide as their cards, packed to the left, so the second starts
+     right after the first instead of at the halfway mark */
+  .people {
+    grid-template-columns: repeat(2, auto);
+    justify-content: start;
+    column-gap: 1.5em;
+  }
+}
