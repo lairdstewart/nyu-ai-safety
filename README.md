@@ -17,6 +17,12 @@ UI/UX goals
 - Easy to navigate
 - Non-pretentious
 
+To test
+
+- Run `npx serve` to run the site. This is necessary because the internal links
+  don't specify ".html" on the end (to keep the final site links cleaner) but this
+  breaks local file system navigation if not running on a server.
+
 # Newsletter
 
 ## Sending a newsletter
